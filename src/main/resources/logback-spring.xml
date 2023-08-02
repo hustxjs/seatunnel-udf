@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+    <springProperty scope="context" name="logLevel" source="log.level"/>
+    <springProperty scope="context" name="logPath" source="log.path"/>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] [%class:%line] - %m %n</pattern>
+        </encoder>
+    </appender>
+
+
+<!--    E:\gx\config\consum_cjdb\gxto-oracle-cjdb  -->
+<!--    E:\gx\config\consum_jjdb\gxto-oracle-jjdb  -->
+<!--    E:\gx\config\consum_fkdb\gxto-oracle-fkdb  -->
+
+<!--    /usr/ds_service/gx-to-oracle-config/consum_jjdb/gxto-oracle-jjdb   -->
+<!--    /usr/ds_service/gx-to-oracle-config/consum_cjdb/gxto-oracle-cjdb   -->
+<!--    /usr/ds_service/gx-to-oracle-config/consum_fkdb/gxto-oracle-fkdb   -->
+
+    <appender name="FILE-OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/xx.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] [%class:%line] - %m %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/xx.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <!-- 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+    
+        <root level="INFO">
+        <appender-ref ref="FILE-OUT" />
+    </root>
+</configuration>
